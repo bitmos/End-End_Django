@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div style="position: absolute;
+    top: 5%;
+    left: 35%;">
+    <h1>Titanic Survival Prediction</h1>
+    <form method="POST" action="{% url 'estimate_titanic'%}">
+        {% csrf_token %}
+        <div style="align-self: center; margin: 2rem;">
+            <label class="form-group" for="bhk">Passenger Class</label>
+        <select class="form-control" id="class" name='class' aria-label="Default select example">
+            <option selected>{{data.selected_class}}</option>
+            <option value=1>One</option>
+            <option value=2>Two</option>
+            <option value=3>Three</option>
+        </select>
+            </div>
+    <div class="form-group" style="align-self: center; margin: 2rem;">
+        <label for="usernameValidate">Age: </label>
+        <input type="text" class="form-control " id="age"name='age' value="{{data.age}}"required>
+    </div>
+    <div class="form-group" style="align-self: center; margin: 2rem;">
+        <label for="usernameValidate">Fare: </label>
+        <input type="text" class="form-control " id="fare"name='fare' value="{{data.fare}}"required>
+    </div>
+  
+    <div style="align-self: center; margin: 2rem;">
+        <label class="form-group" for="bhk">Gender</label>
+    <select class="form-control" id="gender" name='gender' aria-label="Default select example">
+        <option selected>{{data.selected_gender}}</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+    </select>
+        </div>
+    
+   <br>
+<input style="align-self: center; margin-left: 2rem;" type="submit" class="btn btn-primary" value='Submit'/>
+</form><br>
+{% if data.price %}
+          Result : {{ data.price }}        
+     {% endif %}</div>
+    </div>
+</body>
+</html>
