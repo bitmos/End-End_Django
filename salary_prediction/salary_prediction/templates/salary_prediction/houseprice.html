@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div style="position: absolute;
+    top: 5%;
+    left: 35%;">
+    <h1>Salary Predictions</h1>
+    <form method="POST" action="{% url 'estimate_salary'%}">
+        {% csrf_token %}
+    <div class="form-group" style="align-self:center; margin: 2rem;">
+        <label class="my-1 me-2" for="state">Company:</label>
+        <select  class="form-control"  id="company" name="company">
+            {% if data.selected_company %}
+            <option selected>{{data.selected_company}}</option>
+            {% endif %}
+            {% for loc in data.company %}
+            <option size="3" value="{{loc}}">{{loc}}</option>
+{% endfor %}
+
+            
+        </select>
+    </div>
+    <div class="mb-2" style="align-self:center; margin: 2rem;">
+        <label class="form-group" for="state">Job:</label>
+        <select  class="form-control"  id="job" name="job">
+            {% if data.selected_job %}
+            <option selected>{{data.selected_job}}</option>
+            {% endif %}
+            {% for loc in data.job %}
+            <option size="3" value="{{loc}}">{{loc}}</option>
+{% endfor %}
+
+            
+        </select>
+    </div>
+    <div class="mb-2" style="align-self:center; margin: 2rem;">
+        <label class="form-group" for="state">Degree:</label>
+        <select  class="form-control"  id="degree" name="degree">
+            {% if data.selected_degree %}
+            <option selected>{{data.selected_degree}}</option>
+            {% endif %}
+            {% for loc in data.degree %}
+            <option size="3" value="{{loc}}">{{loc}}</option>
+{% endfor %}
+
+            
+        </select>
+    </div>
+
+    <div style="align-self: center; margin: 2rem;">
+
+<br>
+<input  type="submit" class="btn btn-primary" value='Submit'/>
+<br>
+</form>
+<div style="align-self:center; margin-left: 1rem; margin-top: 2rem;">
+{% if data.text %}
+   {{data.text}}
+     {% endif %}
+    </div>
+</div>
+</div>
+</body>
+</html>

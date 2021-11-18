@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'fa/css/all.min.css' %}">
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div style="position: absolute;
+    top: 5%;
+    left: 35%;">
+    <h1>House Price Predictions</h1>
+    <form method="POST" action="{% url 'estimate'%}">
+        {% csrf_token %}
+    <div class="mb-4" style="align-self: center; margin: 2rem;">
+        <label for="usernameValidate">Area in sqft: </label>
+        <input type="text" class="form-control is-invalid" id="area"name='area' value="{{data.area}}"required>
+    </div>
+    <div class="form-group" style="align-self:center; margin: 2rem;">
+        <label class="my-1 me-2" for="state">Select Location:</label>
+        <select ;" class="form-control"  id="location" name="location">
+            {% if data.selected %}
+            <option selected>{{data.selected}}</option>
+            {% endif %}
+            {% for loc in data.locations %}
+            <option size="3" value="{{loc}}">{{loc}}</option>
+            
+{% endfor %}
+            
+        </select>
+    </div>
+    <div style="align-self: center; margin: 2rem;">
+    <label class="form-group" for="bhk">BHK</label>
+<select class="form-control" id="bhk" name='bhk' aria-label="Default select example">
+    <option selected>{{data.bhk}}</option>
+    <option value=1>One</option>
+    <option value=2>Two</option>
+    <option value=3>Three</option>
+    <option value=4>Four</option>
+    <option value=5>Five</option>
+    <option value=6>Six</option>
+</select>
+    </div>
+    <div style="align-self: center; margin: 2rem;">
+
+<label class="form-group" for="bath">Bathrooms</label>
+<select class="form-control" id="bath" name='bath' aria-label="Default select example">
+    <option selected>{{data.bath}}</option>
+    <option value=1>One</option>
+    <option value=2>Two</option>
+    <option value=3>Three</option>
+    <option value=4>Four</option>
+    <option value=5>Five</option>
+    <option value=6>Six</option>
+</select><br>
+<input  type="submit" class="btn btn-primary" value='Submit'/>
+</form>
+<br>
+<div style="margin-top: 1rem;">
+{% if data.price %}
+          Result : {{ data.price }} Lakhs       
+     {% endif %}
+    </div>
+</div>
+</div>
+</body>
+</html>
